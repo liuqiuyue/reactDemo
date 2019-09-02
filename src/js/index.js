@@ -1,24 +1,40 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+import ComponentHeader from './components/header';
+import ComponentFooter from './components/footer';
+import BodyIndex from './components/bodyindex';
 
-var ExampleApplication = React.createClass({
-  render: function() {
-    var elapsed = Math.round(this.props.elapsed  / 100);
-    var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
-    var message =
-      'React has been successfully running for ' + seconds + ' seconds.';
+import 'antd/dist/antd.css';
 
-    return React.DOM.p(null, message);
-  }
-});
+class Index extends React.Component {
 
-// Call React.createFactory instead of directly call ExampleApplication({...}) in React.render
-var ExampleApplicationFactory = React.createFactory(ExampleApplication);
+	componentWillMount(){
+		//定义你的逻辑即可
+		console.log("Index - componentWillMount");
+	}
 
-var start = new Date().getTime();
-setInterval(function() {
-  ReactDOM.render(
-    ExampleApplicationFactory({elapsed: new Date().getTime() - start}),
-    document.getElementById('example')
-  );
-}, 50);
+	componentDidMount(){
+		console.log("Index - componentDidMount");
+	}
+
+	render() {
+		/*
+		var component;
+		if (用户已登录) {
+			component = <ComponentLoginedHeader/>
+		}
+		else{
+			component = <ComponentHeader/>
+		}
+		*/
+		return (
+			<div>
+				<ComponentHeader/>
+				<BodyIndex userid={999} username={"Parry1"}/>
+				<ComponentFooter/>
+			</div>
+		);
+	}
+}
+ReactDOM.render(
+	<Index/>, document.getElementById('example'));
